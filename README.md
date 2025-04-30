@@ -21,7 +21,21 @@ A simple web-based interface to schedule ON and OFF times for lights.
 5. run the script websocket_server.py
 6. run the script mqttsub.py
 7. add the following codes to your arduino and connect to the right port :
-``
+
+```cpp 
+int relayPin = 8; void setup() {
+  Serial.begin(9600);
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, HIGH); // Relay OFF initially
+}
+
+void loop() {
+   if (Serial.available() > 0) {String cmd = Serial.readStringUntil('\n'); 
+   cmd.trim(); if (cmd == "ON") { digitalWrite(relayPin, LOW); // Relay ON }
+    else if (cmd == "OFF") 
+    { digitalWrite(relayPin, HIGH); // Relay OFF } } }
+    
+```
 
 ## 🛠 Technologies Used
 
